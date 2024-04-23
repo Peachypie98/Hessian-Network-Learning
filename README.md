@@ -2,7 +2,7 @@
 ## Abstract
 Hessian matrix is a square matrix of second-order partial derivative of a scalar-valued function. In the context of neural networks and deep learning, this function typically represents the loss or object function, which the training process aims to minimize. The Hessian Matrix, thus describes the local curvature of the loss function landscape.
 
-When the parameters of a model are organized in a matrix form of *m* x *n*, we vectorize this matrix to convert it into a vector with *mn* elements. For a function *f* that has this vector as input, the Hessian matrix of *f* is the *mn* x *mn* matrix of second partial derivatives. Each element of this Hessian matrix corresponds to the second derivative with respect to two of the *mn* parameters
+When the parameters of a model are organized in a matrix form of *m* x *n*, we vectorize this matrix to convert it into a vector with *mn* elements. For a function *f* that has this vector as input, the Hessian matrix of *f* is the *mn* x *mn* matrix of second partial derivatives. Each element of this Hessian matrix corresponds to the second derivative with respect to two of the *mn* parameters.
 <p align="center">
   <img width="431" height="295" src="images/hessian_matrix.png">
 </p>
@@ -15,7 +15,7 @@ When the parameters of a model are organized in a matrix form of *m* x *n*, we v
 </p>
 
 ## Example Codes 
-"In these example codes, we configured a dummy model parameter and a target parameter, each with a batch size and feature dimension of 5. The parameters are updated across 40 iterations using a learning rate of 0.1. The criterion applied in this experiment is the Mean Squared Error(MSE) loss."
+In these example codes, we configured a dummy model parameter and a target parameter, each with a batch size and feature dimension of 5. The parameters are updated across 40 iterations using a learning rate of 0.1. The criterion applied in this experiment is the Mean Squared Error(MSE) loss.
 
 ### Conventional Gradient Descent (1st Order Partial Derivative)
 ```py
