@@ -1,4 +1,4 @@
-# Hessian Network Optimization (PyTorch)
+# Hessian Network Learning (PyTorch)
 ## Abstract
 Hessian matrix is a square matrix of second-order partial derivative of a scalar-valued function. In the context of neural networks and deep learning, this function typically represents the loss or object function, which the training process aims to minimize. The Hessian Matrix, thus describes the local curvature of the loss function landscape.
 
