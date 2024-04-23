@@ -4,14 +4,14 @@ Hessian matrix is a square matrix of second-order partial derivative of a scalar
 
 When the parameters of a model are organized in a matrix form of *m* x *n*, we vectorize this matrix to convert it into a vector with *mn* elements. For a function *f* that has this vector as input, the Hessian matrix of *f* is the *mn* x *mn* matrix of second partial derivatives. Each element of this Hessian matrix corresponds to the second derivative with respect to two of the *mn* parameters
 <p align="center">
-  <img width="683" height="212" src="images/hessian_matrix.png">
+  <img width="431" height="295" src="images/hessian_matrix.png">
 </p>
 
 ## Merits of Using Hessian in Network Learning
 * The Hessian matrix provides critical insights into the geometry of the loss surface, thereby informing us about the curvature of the graph. It enables the optimizer to adjust its steps based on this curvature: in regions where the curvature is steep, the optimizer takes smaller steps to prevent overshooting the minimum; conversely, in flatter regions, it can afford to take larger steps.
 * Neural network training landscapes often contain numerous saddle points, characterized by zero gradients yet not constituting minima. The Hessian matrix can effectively distinguish these saddle points from true minima, as it shows neither definitively positive nor negative definiteness at these points.
 <p align="center">
-  <img width="683" height="212" src="images/landscape_curvature.png">
+  <img width="423" height="294" src="images/landscape_curvature.png">
 </p>
 
 ## Example Codes 
@@ -119,10 +119,10 @@ for i in range(epoch):
 
 ## Graph Comparison & Relative Percentage Improvement
 <p align="center">
-  <img width="683" height="212" src="images/graph_result.png">
+  <img width="576" height="432" src="images/graph_result.png">
 </p>
 
-| Method | Initial Loss (Epoch 0) | Loss (Epoch 40) | Relative Percentage Improvement |
+| Method | Initial Loss <br> (Epoch 0) | Final Loss <br> (Epoch 40) | Relative Percentage Improvement |
 | ----- | --------- | --------- | --------- |
 | 1st Order Partial Derivative (Manual) | 0.1446 | 0.0893 | 38.2% |
 | 2nd Order Partial Derivative (Manual / PyTorch) | 0.1446 | 0.0003 | 99.8% |
