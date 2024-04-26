@@ -1,24 +1,48 @@
 # Hessian Network Learning (PyTorch)
 ## Abstract
-Hessian matrix is a square matrix of second-order partial derivative of a scalar-valued function. In the context of neural networks and deep learning, this function typically represents the loss or object function, which the training process aims to minimize. The Hessian Matrix, thus describes the local curvature of the loss function landscape.
+Hessian matrix is a square matrix of second-order partial derivative of a scalar-valued function. In the context of neural networks and deep learning, this function typically represents the loss or object function, which the training process aims to minimize. The Hessian Matrix, thus describes the curvature of the loss function surface.
 
-When the parameters of a model are organized in a matrix form of *m* x *n*, we vectorize this matrix to convert it into a vector with *mn* elements. For a function *f* that has this vector as input, the Hessian matrix of *f* is the *mn* x *mn* matrix of second partial derivatives. Each element of this Hessian matrix corresponds to the second derivative with respect to two of the *mn* parameters.
+When the parameters of a model are organized in a matrix form of *m* x *n*, we vectorize this matrix to convert it into a vector of *mn* elements. For a function *f* that has this vector as input, the Hessian matrix of *f* will have a size of *mn* x *mn* matrix. Each element in the Hessian matrix, H[*i*, *j*], is the second derivative of the function with with respect to two of its variables.
 <p align="center">
   <img width="431" height="295" src="images/hessian_matrix.png">
 </p>
 
+## Background
+When we use the common gradient descent method, we are generally assuming that the loss surface of the network behaves like a plane, disregarding any curvature. This assumption often results in slower training speeds. To address this, we can use the information from the second derivative of a function, as it uses curvature information to improve search direction and make more progress per step. The fundamental approach for second-order minimazation is Newton's method.
+<p align="center">
+  <img width="431" height="295" src="images/newton_method_formula.png">
+</p>
+
+Now, we will discuss how this optimization formula is derived. It begins with a Taylor series. We all know that when a real-valued function *f(x)* is differentiable at the point x = a, *f(x)* indeed has a power series representation around this point. For now, consider a function *f* and approximate it using a second-order Taylor expansion at the point x<sub>0</sub>.
+<p align="center">
+  <img width="431" height="295" src="images/derive1.png">
+</p>
+<p align="center">
+  <img width="431" height="295" src="images/derive2.png">
+</p>
+<p align="center">
+  <img width="431" height="295" src="images/derive3.png">
+</p>
+<p align="center">
+  <img width="431" height="295" src="images/derive4.png">
+</p>
+In Newton's method, we usually don't use learning rate because Hessian metrix already adjusts the step size based on the curvature of the loss surface at current point.
+
 ## Merits of Using Hessian in Network Learning
 * The Hessian matrix provides critical insights into the geometry of the loss surface, thereby informing us about the curvature of the graph. It enables the optimizer to adjust its steps based on this curvature: in regions where the curvature is steep, the optimizer takes smaller steps to prevent overshooting the minimum; conversely, in flatter regions, it can afford to take larger steps.
-* Neural network training landscapes often contain numerous saddle points, characterized by zero gradients yet not constituting minima. The Hessian matrix can effectively distinguish these saddle points from true minima, as it shows neither definitively positive nor negative definiteness at these points.
+* When training neural networks, there are often many saddle points, which are places where the gradient is zero but are not the lowest points. The Hessian matrix helps idenity and avoid these saddle points because it is netiher clearly positive nor clearly negative at these locations.
 <p align="center">
   <img width="423" height="294" src="images/landscape_curvature.png">
 </p>
 
 ## Example Codes 
-In these example codes, we configured a dummy model parameter and a target parameter, each with a batch size and feature dimension of 5. The parameters are updated across 40 iterations using a learning rate of 0.1. The criterion applied in this experiment is the Mean Squared Error(MSE) loss.
+In these example codes, we configured a dummy model parameter and a target parameter, each with a batch size and feature dimension of 5. The parameters are updated across 40 iterations using a learning rate of 0.1. The criterion applied in this experiment is the Mean Squared Error(MSE) loss. For optimizing the network using Hessian matrix, we purposely included a fixed learning rate in order to demonstrate the convergence speed across all experiemnts.
 
 ### Conventional Gradient Descent (1st Order Partial Derivative)
 ```py
+# Create Seed
+torch.manual_seed(0)
+
 # Create a dummy model parameter and target parameter with batch and feature of 5
 params = torch.rand(5,5, requires_grad=True)
 target = torch.rand(5,5)
@@ -46,8 +70,11 @@ for i in range(epoch):
         print(f"Epoch {i} | Loss: {loss.item():.4f}")
 ```
 
-### Hessian Gradient Descent (2nd Order Partial Derivative)
+### Hessian Optimization (2nd Order Partial Derivative)
 ```py
+# Create Seed
+torch.manual_seed(0)
+
 # Create a dummy model parameters and target parameters
 params = torch.rand(5,5, requires_grad=True)
 target = torch.rand(5,5)
@@ -82,8 +109,11 @@ for i in range(epoch):
         print(f"Epoch {i} | Loss: {loss.item():.4f}")
 ```
 
-### Hessian Gradient Descent PyTorch (2nd Order Partial Derivative)
+### Hessian Optimization (2nd Order Partial Derivative - PyTorch)
 ```py
+# Create Seed
+torch.manual_seed(0)
+
 # Create a dummy model parameters and target parameters
 params = torch.rand(5,5, requires_grad=True)
 target = torch.rand(5,5)
