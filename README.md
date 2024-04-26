@@ -10,21 +10,21 @@ When the parameters of a model are organized in a matrix form of *m* x *n*, we v
 ## Background
 When we use the common gradient descent method, we are generally assuming that the loss surface of the network behaves like a plane, disregarding any curvature. This assumption often results in slower training speeds. To address this, we can use the information from the second derivative of a function, as it uses curvature information to improve search direction and make more progress per step. The fundamental approach for second-order minimazation is Newton's method.
 <p align="center">
-  <img width="431" height="295" src="images/newton_method_formula.png">
+  <img width="580" height="79" src="images/newton_method_formula.gif">
 </p>
 
-Now, we will discuss how this optimization formula is derived. It begins with a Taylor series. We all know that when a real-valued function *f(x)* is differentiable at the point x = a, *f(x)* indeed has a power series representation around this point. For now, consider a function *f* and approximate it using a second-order Taylor expansion at the point x<sub>0</sub>.
+Now, let's delve into the derivation of this optimization formula, beginning with a Taylor series. As you know, if a real-valued function *f(x)* is differentiable at the point x = a, it can be represented by a power series expansion around this point. For our purposes, let's approximate the function *f* using a second-order Taylor expansion at x<sub>0</sub>. Subsequently, we aim to differentiate *f(x + x<sub>0</sub>)* to locate its minimum. This process leads us to the following derivation.
 <p align="center">
-  <img width="431" height="295" src="images/derive1.png">
+  <img width="580" height="60" src="images/derive1.gif">
 </p>
 <p align="center">
-  <img width="431" height="295" src="images/derive2.png">
+  <img width="580" height="60" src="images/derive2.gif">
 </p>
 <p align="center">
-  <img width="431" height="295" src="images/derive3.png">
+  <img width="580" height="60" src="images/derive3.gif">
 </p>
 <p align="center">
-  <img width="431" height="295" src="images/derive4.png">
+  <img width="160" height="65" src="images/derive4.gif">
 </p>
 In Newton's method, we usually don't use learning rate because Hessian metrix already adjusts the step size based on the curvature of the loss surface at current point.
 
