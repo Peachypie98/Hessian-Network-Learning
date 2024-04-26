@@ -13,7 +13,7 @@ When we use the common gradient descent method, we are generally assuming that t
   <img width="580" height="79" src="images/newton_method_formula.gif">
 </p>
 
-Now, let's delve into the derivation of this optimization formula, beginning with a Taylor series. As you know, if a real-valued function *f(x)* is differentiable at the point x = a, it can be represented by a power series expansion around this point. For our purposes, let's approximate the function *f* using a second-order Taylor expansion at x<sub>0</sub>. Subsequently, we aim to differentiate *f(x + x<sub>0</sub>)* to locate its minimum. This process leads us to the following derivation.
+Now, let's delve into the derivation of this optimization formula, beginning with a Taylor series. As you know, if a real-valued function *f(x)* is differentiable at the point x = a, it can be represented by a power series expansion around this point. For our purposes, let's approximate the function *f* using a second-order Taylor expansion at x<sub>0</sub>. Subsequently, we aim to differentiate *f(x + x<sub>0</sub>)* to locate its minimum. This process leads us to the following derivation. If a function has multiple dimensions, in that case, we replace the first derivative with gradients and second derivatives with Hessian matrix.
 <p align="center">
   <img width="580" height="60" src="images/derive1.gif">
 </p>
